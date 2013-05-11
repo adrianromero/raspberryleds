@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="switch_on">
+        <item>encender</item>
+        <item>enciende</item>
+    </string-array>
+    <string-array name="switch_off">
+        <item>apagar</item>
+        <item>apaga</item>
+    </string-array>
+    <string-array name="toggle">
+        <item>cambiar</item>
+        <item>cambia</item>
+    </string-array>
+    
+    <string-array name="zero">
+        <item>0</item>
+        <item>cero</item>
+    </string-array>
+    <string-array name="one">
+        <item>1</item>
+        <item>uno</item>
+    </string-array>
+    <string-array name="two">
+        <item>2</item>
+        <item>dos</item>
+    </string-array>
+    <string-array name="three">
+        <item>3</item>
+        <item>tres</item>
+    </string-array>
+    <string-array name="four">
+        <item>4</item>
+        <item>cuatro</item>
+    </string-array>
+    <string-array name="five">
+        <item>5</item>
+        <item>cinco</item>
+    </string-array>
+    <string-array name="six">
+        <item>6</item>
+        <item>seis</item>
+    </string-array>
+    <string-array name="seven">
+        <item>7</item>
+        <item>siete</item>
+    </string-array>
+    <string-array name="all">
+        <item>todos</item>
+    </string-array>
+    
+</resources>
