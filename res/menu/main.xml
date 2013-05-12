@@ -9,16 +9,14 @@
           android:title="@string/action_reload"
           android:showAsAction="ifRoom"
           android:onClick="onRefreshClicked"/>
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"
-        android:onClick="onSettingsClicked"/>
-    <item
-        android:id="@+id/action_about"
-        android:orderInCategory="200"
-        android:showAsAction="never"
-        android:title="@string/action_about"
-        android:onClick="onAboutClicked"/>
+    <item android:id="@+id/action_settings"
+          android:orderInCategory="100"
+          android:showAsAction="never"
+          android:title="@string/action_settings"
+          android:onClick="onSettingsClicked"/>
+    <item android:id="@+id/action_about"
+          android:orderInCategory="200"
+          android:showAsAction="never"
+          android:title="@string/action_about"
+          android:onClick="onAboutClicked"/>
 </menu>

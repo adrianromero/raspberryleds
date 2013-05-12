@@ -1,3 +1,20 @@
+//    Raspberry LEDs is an application to remotely control Raspberry Pi LEDs connected to the GPIO.
+//    Copyright (C) 2013 Adrián Romero Corchado.
+//
+//    This file is part of Web Common
+//
+//     Licensed under the Apache License, Version 2.0 (the "License");
+//     you may not use this file except in compliance with the License.
+//     You may obtain a copy of the License at
+//     
+//         http://www.apache.org/licenses/LICENSE-2.0
+//     
+//     Unless required by applicable law or agreed to in writing, software
+//     distributed under the License is distributed on an "AS IS" BASIS,
+//     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//     See the License for the specific language governing permissions and
+//     limitations under the License.
+
 package com.adr.raspberryleds;
 
 import java.util.ArrayList;
@@ -45,17 +62,12 @@ public class MainActivity extends Activity {
 //	        } else {
 //	            // display error
 //	        }
-		
-		// refreshLeds();
-		
-
 	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
-		getMenuInflater().inflate(R.menu.main, menu);
-			
+		getMenuInflater().inflate(R.menu.main, menu);			
 		return true;
 	}
 	
@@ -92,7 +104,7 @@ public class MainActivity extends Activity {
 	
 	private void refreshLeds() {
 
-		Log.d("com.adr.raspberryleds.LedInformation", "onRestoreInstance");
+		Log.d("com.adr.raspberryleds.LedInformation", "refreshing");
 
 		new LedInformation(this, getSettingRpiUrl()) {
 			
@@ -244,5 +256,4 @@ public class MainActivity extends Activity {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		return sharedPref.getString("pref_rpi_url", "");
 	}
-
 }
