@@ -76,14 +76,17 @@ public class MainActivity extends Activity {
 		
 		super.onPrepareOptionsMenu(menu);
 		
+		// Set Enable status accofing
+		MenuItem speakmenu = menu.findItem(R.id.action_speak);
+		speakmenu.setEnabled(this.findViewById(R.id.switch0).isEnabled());
+		
         // Disable button if no recognition service is present
         PackageManager pm = getPackageManager();
         List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-        if (activities.size() == 0) {
-        	MenuItem speakmenu = menu.findItem(R.id.action_speak);
+        if (activities.size() == 0) {       	
         	speakmenu.setEnabled(false);
-        }  				
-		
+        }  	
+        
 		return true;
 	}
 	
@@ -146,6 +149,9 @@ public class MainActivity extends Activity {
 						((Switch) MainActivity.this.findViewById(R.id.switch6)).setChecked(false);											
 						((Switch) MainActivity.this.findViewById(R.id.switch7)).setChecked(false);																	
 					}	
+					
+					
+					MainActivity.this.invalidateOptionsMenu();
 				}
 				progress = null;	
 			}						
