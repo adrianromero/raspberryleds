@@ -29,7 +29,7 @@ public class LedActivate extends AsyncTask<Void, Void, JSONObject> {
 	private String url;
 	private LedCommand ledc;
 	
-	public LedActivate(Context cnt, String url, LedCommand ledc) {
+	public LedActivate(String url, LedCommand ledc) {
 		
 		this.url = url;
 		this.ledc = ledc;

@@ -20,12 +20,9 @@ package com.adr.raspberryleds;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -40,14 +37,15 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements LedDataFragment.LedDataCallbacks {
+    
+	private static final int REQUEST_CODE = 332341;
 	
-	private static final int REQUEST_CODE = 123456;
-	
-	private boolean started = false;
+	private LedDataFragment leddata;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -62,6 +60,64 @@ public class MainActivity extends Activity {
 //	        } else {
 //	            // display error
 //	        }
+		
+	    FragmentManager fm = getFragmentManager();
+	    leddata = (LedDataFragment) fm.findFragmentByTag(LedDataFragment.TAG);
+	    if (leddata == null) {
+	    	leddata = new LedDataFragment();
+	    	fm.beginTransaction().add(leddata, LedDataFragment.TAG).commit();
+	    }		
+
+		leddata.loadInit(getSettingRpiUrl());
+	}
+	
+	@Override
+	public void onStartLoadLedData() {
+		findViewById(R.id.progressView).setVisibility(View.VISIBLE);				
+	}
+	
+	@Override
+	public void onFinishLoadLedData() {
+
+		findViewById(R.id.progressView).setVisibility(View.GONE);		
+		if (leddata.hasDataException()) {
+			Log.d("com.adr.raspberryleds.MainActivity", leddata.toString());				
+		    DialogFragment newFragment = new CannotReachFragment();
+		    newFragment.show(MainActivity.this.getFragmentManager(), CannotReachFragment.TAG);				
+		}			
+	}
+	
+	@Override
+	public void onCancelLoadLedData() {
+
+		findViewById(R.id.progressView).setVisibility(View.GONE);		
+		if (leddata.hasDataException()) {
+			Log.d("com.adr.raspberryleds.MainActivity", leddata.toString());				
+		    DialogFragment newFragment = new CannotReachFragment();
+		    newFragment.show(MainActivity.this.getFragmentManager(), CannotReachFragment.TAG);				
+		}			
+	}
+	
+	@Override
+	public void onRefreshLedData() {
+		findViewById(R.id.switch0).setEnabled(leddata.getLedEnabled("LED0"));
+		findViewById(R.id.switch1).setEnabled(leddata.getLedEnabled("LED1"));
+		findViewById(R.id.switch2).setEnabled(leddata.getLedEnabled("LED2"));
+		findViewById(R.id.switch3).setEnabled(leddata.getLedEnabled("LED3"));
+		findViewById(R.id.switch4).setEnabled(leddata.getLedEnabled("LED4"));
+		findViewById(R.id.switch5).setEnabled(leddata.getLedEnabled("LED5"));
+		findViewById(R.id.switch6).setEnabled(leddata.getLedEnabled("LED6"));
+		findViewById(R.id.switch7).setEnabled(leddata.getLedEnabled("LED7"));		
+		((Switch) findViewById(R.id.switch0)).setChecked(leddata.getLedStatus("LED0"));
+		((Switch) findViewById(R.id.switch1)).setChecked(leddata.getLedStatus("LED1"));
+		((Switch) findViewById(R.id.switch2)).setChecked(leddata.getLedStatus("LED2"));
+		((Switch) findViewById(R.id.switch3)).setChecked(leddata.getLedStatus("LED3"));
+		((Switch) findViewById(R.id.switch4)).setChecked(leddata.getLedStatus("LED4"));
+		((Switch) findViewById(R.id.switch5)).setChecked(leddata.getLedStatus("LED5"));
+		((Switch) findViewById(R.id.switch6)).setChecked(leddata.getLedStatus("LED6"));
+		((Switch) findViewById(R.id.switch7)).setChecked(leddata.getLedStatus("LED7"));	
+		
+		invalidateOptionsMenu();			
 	}
 	
 	@Override
@@ -89,97 +145,16 @@ public class MainActivity extends Activity {
         
 		return true;
 	}
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
-		
-		started = true;
-		refreshLeds();
-	}
-	
-	@Override
-	protected void onStop() {
-		super.onStop();
-		
-		started = false;
-	}
-	
-	private void refreshLeds() {
 
-		Log.d("com.adr.raspberryleds.LedInformation", "refreshing");
-
-		new LedInformation(this, getSettingRpiUrl()) {
-			
-			private ProgressDialog progress;
-			
-			@Override
-			protected void onPreExecute () {
-				if (started) {
-					progress = ProgressDialog.show(MainActivity.this, "", MainActivity.this.getResources().getText(R.string.loading));													
-				} else {
-					cancel(false);
-				}
-			}
-			
-			@Override
-			protected void onPostExecute (JSONObject result) {
-				
-				if (started) {
-					progress.dismiss();
-					
-					boolean success = checkSuccess(result);
-					
-					((Switch) MainActivity.this.findViewById(R.id.switch0)).setEnabled(success);
-					((Switch) MainActivity.this.findViewById(R.id.switch1)).setEnabled(success);
-					((Switch) MainActivity.this.findViewById(R.id.switch2)).setEnabled(success);
-					((Switch) MainActivity.this.findViewById(R.id.switch3)).setEnabled(success);
-					((Switch) MainActivity.this.findViewById(R.id.switch4)).setEnabled(success);
-					((Switch) MainActivity.this.findViewById(R.id.switch5)).setEnabled(success);
-					((Switch) MainActivity.this.findViewById(R.id.switch6)).setEnabled(success);
-					((Switch) MainActivity.this.findViewById(R.id.switch7)).setEnabled(success);
-					
-					if (!success) {
-						((Switch) MainActivity.this.findViewById(R.id.switch0)).setChecked(false);											
-						((Switch) MainActivity.this.findViewById(R.id.switch1)).setChecked(false);											
-						((Switch) MainActivity.this.findViewById(R.id.switch2)).setChecked(false);											
-						((Switch) MainActivity.this.findViewById(R.id.switch3)).setChecked(false);											
-						((Switch) MainActivity.this.findViewById(R.id.switch4)).setChecked(false);											
-						((Switch) MainActivity.this.findViewById(R.id.switch5)).setChecked(false);											
-						((Switch) MainActivity.this.findViewById(R.id.switch6)).setChecked(false);											
-						((Switch) MainActivity.this.findViewById(R.id.switch7)).setChecked(false);																	
-					}	
-					
-					
-					MainActivity.this.invalidateOptionsMenu();
-				}
-				progress = null;	
-			}						
-		}.execute();				
-	}
-	
 	public void onToggleClicked(View view) {
 		
 		Switch sw = ((Switch) view);
-		actionLed(new LedCommand(new String[]{(String) sw.getTag()}, sw.isChecked() ? LedCommand.CMD_SWITCH_ON : LedCommand.CMD_SWITCH_OFF));
+		leddata.execute(getSettingRpiUrl(), new LedCommand(new String[]{(String) sw.getTag()}, sw.isChecked() ? LedCommand.CMD_SWITCH_ON : LedCommand.CMD_SWITCH_OFF));
 	}
-	
-	private void actionLed(LedCommand ledc) {
-
-	    new LedActivate(this, getSettingRpiUrl(), ledc){
-	    	@Override
-	    	protected void onPostExecute (JSONObject result) {
-	    		if (started) {
-	    			checkSuccess(result);
-	    		}
-	    	}
-	    }.execute();	
-	}
-
 	
 	public void onRefreshClicked(MenuItem item) {
-		
-		refreshLeds();
+		Log.d("com.adr.raspberryleds.LedInformation", "refreshing");		
+		leddata.loadForce(getSettingRpiUrl());
 	}
 
 	public void onSpeakClicked(MenuItem item) {
@@ -206,7 +181,7 @@ public class MainActivity extends Activity {
         		toast.show();
         	} else {
         		// parse command and return ..
-        		this.actionLed(vc);
+        		leddata.execute(getSettingRpiUrl(), vc);
         	} 
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -222,40 +197,6 @@ public class MainActivity extends Activity {
 		
 		Intent intent = new Intent(this, AboutActivity.class);
 		startActivity(intent);
-	}
-	
-	private boolean checkSuccess(JSONObject result) {
-	
-		if (result.has("exception")) {
-			
-			Log.d("com.adr.raspberryleds.MainActivity", result.toString());
-			
-			new AlertDialog.Builder(MainActivity.this)
-		    .setTitle(MainActivity.this.getResources().getString(R.string.app_name))
-		    .setMessage(MainActivity.this.getResources().getString(R.string.msg_cannot_reach_rpi))
-		    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) { 
-		        }
-		     })
-		     .show();	
-			return false;
-		} else {
-			refreshSwitch(result, R.id.switch0, "LED0");
-			refreshSwitch(result, R.id.switch1, "LED1");
-			refreshSwitch(result, R.id.switch2, "LED2");
-			refreshSwitch(result, R.id.switch3, "LED3");
-			refreshSwitch(result, R.id.switch4, "LED4");
-			refreshSwitch(result, R.id.switch5, "LED5");
-			refreshSwitch(result, R.id.switch6, "LED6");
-			refreshSwitch(result, R.id.switch7, "LED7");				
-			return true;
-		}
-	}
-	
-	private void refreshSwitch(JSONObject result, int id, String led) {
-		if (result.has(led)) {
-			((Switch) MainActivity.this.findViewById(id)).setChecked(result.optBoolean(led));												
-		}	
 	}
 	
 	private String getSettingRpiUrl() {

@@ -30,7 +30,7 @@ public class LedInformation extends AsyncTask<Void, Void, JSONObject> {
 
 	private String url;
 	
-	public LedInformation(Context cnt, String url) {		
+	public LedInformation(String url) {		
 		this.url = url;
 	}
 
@@ -55,7 +55,7 @@ public class LedInformation extends AsyncTask<Void, Void, JSONObject> {
 			try {
 				query.put("exception", e.getMessage());
 			} catch (JSONException e1) {			
-				return null; // never reached.
+				return null; // never thrown.
 			}
 			return query;
 		}	
