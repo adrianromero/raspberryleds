@@ -20,6 +20,7 @@ package com.adr.raspberryleds;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -116,12 +117,14 @@ public class LedDataFragment extends Fragment {
 
     @Override
     public void onAttach(Activity activity) {
+        Log.d("com.adr.raspberryleds.LedDataFragment", "Attach");
         super.onAttach(activity);
         callbacks = (LedDataCallbacks) activity;
     }
 
     @Override
     public void onDetach() {
+        Log.d("com.adr.raspberryleds.LedDataFragment", "Detach");
         super.onDetach();
         callbacks = null;
     }
@@ -163,30 +166,35 @@ public class LedDataFragment extends Fragment {
     }
 
     private void publishRefreshLedData() {
+        Log.d("com.adr.raspberryleds.LedDataFragment", "publishRefreshLedData");
         if (callbacks != null) {
             callbacks.onRefreshLedData();
         }
     }
 
     private void publishStartLoadLedData() {
+        Log.d("com.adr.raspberryleds.LedDataFragment", "publishStartLoadedLedData");
         if (callbacks != null) {
             callbacks.onStartLoadLedData();
         }
     }
 
     private void publishFinishLoadLedData() {
+        Log.d("com.adr.raspberryleds.LedDataFragment", "publishFinishLoadLedData");
         if (callbacks != null) {
             callbacks.onFinishLoadLedData();
         }
     }
 
     private void publishCancelLoadLedData() {
+        Log.d("com.adr.raspberryleds.LedDataFragment", "publishCancelLoadLedData");
         if (callbacks != null) {
             callbacks.onCancelLoadLedData();
         }
     }
 
     public static interface LedDataCallbacks {
+
         public void onRefreshLedData();
 
         public void onStartLoadLedData();
