@@ -18,14 +18,43 @@
 package com.adr.raspberryleds;
 
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 public class SettingsFragment extends PreferenceFragment {
+
+    public final static String PREF_RPI_URL = "pref_rpi_url";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
+
+        assignRPIURLSummary(getPreferenceManager().getSharedPreferences().getString(PREF_RPI_URL, ""));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        findPreference(PREF_RPI_URL).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener () {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                assignRPIURLSummary((String) o);
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        findPreference(PREF_RPI_URL).setOnPreferenceChangeListener(null);
+    }
+
+    private void assignRPIURLSummary(String value) {
+        findPreference(PREF_RPI_URL).setSummary(value);
     }
 }

@@ -18,8 +18,7 @@
 	<string name="lbl_LED7">LED 7</string>
 	
 	<string name="title_activity_settings">Configuración</string>
-	<string name="pref_rpi_url">URL Raspberry Pi</string>
-    <string name="pref_rpi_url_summ">URL donde una Raspberry Pi está escuchando instrucciones.</string>
+	<string name="pref_rpi_url">URL de escucha de Raspberry Pi</string>
     
 	<string name="title_activity_about">Acerca de</string>
     

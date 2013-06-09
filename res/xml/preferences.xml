@@ -3,7 +3,7 @@
     <EditTextPreference
         android:key="pref_rpi_url"
         android:title="@string/pref_rpi_url"
-        android:summary="@string/pref_rpi_url_summ"
+        android:summary=""
         android:defaultValue="http://..." />
 
 </PreferenceScreen>
