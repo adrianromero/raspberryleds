@@ -52,14 +52,14 @@ public class MainActivity extends Activity implements LedDataFragment.LedDataCal
 
         setContentView(R.layout.activity_main);
 
-//	    ConnectivityManager connMgr = (ConnectivityManager) 
-//	            getSystemService(Context.CONNECTIVITY_SERVICE);
-//	        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-//	        if (networkInfo != null && networkInfo.isConnected()) {
-//	            // fetch data
-//	        } else {
-//	            // display error
-//	        }
+//    ConnectivityManager connMgr = (ConnectivityManager)
+//            getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+//        if (networkInfo != null && networkInfo.isConnected()) {
+//            // fetch data
+//        } else {
+//            // display error
+//        }
 
         FragmentManager fm = getFragmentManager();
         leddata = (LedDataFragment) fm.findFragmentByTag(LedDataFragment.TAG);
