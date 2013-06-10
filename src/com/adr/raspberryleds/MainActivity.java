@@ -72,14 +72,18 @@ public class MainActivity extends Activity implements LedDataFragment.LedDataCal
 	}
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
+        Log.d("com.adr.raspberryleds.MainActivity", "Attach LedData");
+        leddata.setLedDataListener(this);
         leddata.loadInit(getSettingRpiUrl());
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onPause() {
+        super.onPause();
+        Log.d("com.adr.raspberryleds.MainActivity", "Dettach LedData");
+        leddata.setLedDataListener(null);
     }
 
 	@Override

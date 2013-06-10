@@ -115,18 +115,8 @@ public class LedDataFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        Log.d("com.adr.raspberryleds.LedDataFragment", "Attach");
-        super.onAttach(activity);
-        callbacks = (LedDataCallbacks) activity;
-    }
-
-    @Override
-    public void onDetach() {
-        Log.d("com.adr.raspberryleds.LedDataFragment", "Detach");
-        super.onDetach();
-        callbacks = null;
+    public void setLedDataListener(LedDataCallbacks callbacks) {
+        this.callbacks = callbacks;
     }
 
     public boolean hasData() {
