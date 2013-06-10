@@ -33,26 +33,29 @@ public class LedDataFragment extends Fragment {
 
     private LedDataCallbacks callbacks = null;
 
+    private String ledurl = null;
     private Map<String, Boolean> ledstatus = null;
     private String ledexception = null;
 
     public void loadInit(String url) {
 
-        if (ledstatus == null) {
-            loadForce(url);
+        if (ledstatus == null || !url.equals(ledurl)) {
+            // url changed or data is not loaded.
+            ledurl = url;
+            loadForce();
         } else {
             publishRefreshLedData();
         }
     }
 
-    public void loadForce(String url) {
+    public void loadForce() {
 
         ledstatus = null;
         ledexception = null;
         publishRefreshLedData();
         publishStartLoadLedData();
 
-        new LedInformation(url) {
+        new LedInformation(ledurl) {
             @Override
             protected void onPostExecute(JSONObject result) {
                 updateResults(result);
@@ -66,8 +69,8 @@ public class LedDataFragment extends Fragment {
         }.execute();
     }
 
-    public void execute(String url, LedCommand lc) {
-        new LedActivate(url, lc) {
+    public void execute(LedCommand lc) {
+        new LedActivate(ledurl, lc) {
             @Override
             protected void onPostExecute(JSONObject result) {
                 updateResults(result);

@@ -174,12 +174,12 @@ public class MainActivity extends Activity implements LedDataFragment.LedDataCal
 	public void onToggleClicked(View view) {
 		
 		Switch sw = ((Switch) view);
-		leddata.execute(getSettingRpiUrl(), new LedCommand(new String[]{(String) sw.getTag()}, sw.isChecked() ? LedCommand.CMD_SWITCH_ON : LedCommand.CMD_SWITCH_OFF));
+		leddata.execute(new LedCommand(new String[]{(String) sw.getTag()}, sw.isChecked() ? LedCommand.CMD_SWITCH_ON : LedCommand.CMD_SWITCH_OFF));
 	}
 	
 	public void onRefreshClicked(MenuItem item) {
 		Log.d("com.adr.raspberryleds.LedInformation", "refreshing");		
-		leddata.loadForce(getSettingRpiUrl());
+		leddata.loadForce();
 	}
 
 	public void onSpeakClicked(MenuItem item) {
@@ -206,7 +206,7 @@ public class MainActivity extends Activity implements LedDataFragment.LedDataCal
         		toast.show();
         	} else {
         		// parse command and return ..
-        		leddata.execute(getSettingRpiUrl(), vc);
+            leddata.execute(vc);
         	} 
         }
         super.onActivityResult(requestCode, resultCode, data);
