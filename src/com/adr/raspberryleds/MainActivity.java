@@ -99,7 +99,6 @@ public class MainActivity extends Activity implements LedDataFragment.LedDataCal
 
         Log.d("com.adr.raspberryleds.MainActivity", "FinishLoadedLedData");
 
-        findViewById(R.id.progressView).setVisibility(View.GONE);
         if (leddata.hasDataException()) {
             Log.d("com.adr.raspberryleds.MainActivity", leddata.toString());
             DialogFragment newFragment = new CannotReachFragment();
@@ -112,7 +111,6 @@ public class MainActivity extends Activity implements LedDataFragment.LedDataCal
 
         Log.d("com.adr.raspberryleds.MainActivity", "CancelLoadedLedData");
 
-        findViewById(R.id.progressView).setVisibility(View.GONE);
         if (leddata.hasDataException()) {
             Log.d("com.adr.raspberryleds.MainActivity", leddata.toString());
             DialogFragment newFragment = new CannotReachFragment();
@@ -124,6 +122,8 @@ public class MainActivity extends Activity implements LedDataFragment.LedDataCal
     public void onRefreshLedData() {
 
         Log.d("com.adr.raspberryleds.MainActivity", "RefreshLedData");
+
+        findViewById(R.id.progressView).setVisibility(leddata.hasData() ? View.GONE : View.VISIBLE);
 
         findViewById(R.id.switch0).setEnabled(leddata.getLedEnabled("LED0"));
         findViewById(R.id.switch1).setEnabled(leddata.getLedEnabled("LED1"));
