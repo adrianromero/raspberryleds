@@ -29,12 +29,13 @@ public class AboutActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_about);
-		
-		TextView tc = (TextView) this.findViewById(R.id.textContent);
-		tc.setText(Html.fromHtml("<b>Title</b>" +  "<br />" + 
-        "<small>description</small>" + "<br />" + 
-        "<small>description</small><br/>" +
-        "Sí es html"));		
 
+        ((TextView) findViewById(R.id.textTitle)).setText(
+                getResources().getString(R.string.app_name) +
+                " " +
+                getResources().getString(R.string.app_version));
+		
+		TextView tc = (TextView) findViewById(R.id.textContent);
+		tc.setText(Html.fromHtml(getResources().getString(R.string.html_about)));
 	}	
 }
