@@ -29,9 +29,19 @@
     <string name="msg_command_not_recognized">Command not recognized</string>
 
     <string name="html_about"><![CDATA[
-        <b>Title</b><br />
-        <small>description</small><br />
-        <small>description</small><br/>
-        Sí es html
+        <p>
+        Raspberry Leds is an Android application that allows to switch on and off leds connected to
+        a Raspberry Pi GPIO. In the Raspberry Pi side it is needed to install the Raspberry Leds
+        Server application that listen and executes the commands launched by the Android
+        application.
+        </p>
+        <h2>License</h2>
+        <p>Licensed under the Apache License, Version 2.0.</p>
+        <p style="text-align:justify;">
+        Copyright &copy; 2013 Adrián Romero Corchado.
+        </p>
+        <p style="text-align:justify;">
+        <a href="https://github.com/adrianromero/raspberryleds">https://github.com/adrianromero/raspberryleds</a>
+        </p>
     ]]></string>
 </resources>

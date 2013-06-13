@@ -27,10 +27,4 @@
     <string name="msg_speak_prompt">Diga la orden...</string>
     <string name="msg_command_not_recognized">Orden no reconocida</string>
 
-    <string name="html_about"><![CDATA[
-        <b>Title</b><br />
-        <small>description</small><br />
-        <small>description</small><br/>
-        Sí es html
-    ]]></string>
 </resources>
