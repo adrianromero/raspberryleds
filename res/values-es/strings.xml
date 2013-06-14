@@ -8,21 +8,21 @@
     <string name="action_reload">Recargar</string>
     <string name="action_speak">Hablar</string>
     <string name="loading">Cargando...</string>
-    
-	<string name="lbl_LED0">LED 0</string>
-	<string name="lbl_LED1">LED 1</string>
-	<string name="lbl_LED2">LED 2</string>
-	<string name="lbl_LED3">LED 3</string>
-	<string name="lbl_LED4">LED 4</string>
-	<string name="lbl_LED5">LED 5</string>
-	<string name="lbl_LED6">LED 6</string>
-	<string name="lbl_LED7">LED 7</string>
-	
-	<string name="title_activity_settings">Configuración</string>
-	<string name="pref_rpi_url">URL de escucha de Raspberry Pi</string>
-    
-	<string name="title_activity_about">Acerca de</string>
-    
+
+    <string name="lbl_LED0">LED 0</string>
+    <string name="lbl_LED1">LED 1</string>
+    <string name="lbl_LED2">LED 2</string>
+    <string name="lbl_LED3">LED 3</string>
+    <string name="lbl_LED4">LED 4</string>
+    <string name="lbl_LED5">LED 5</string>
+    <string name="lbl_LED6">LED 6</string>
+    <string name="lbl_LED7">LED 7</string>
+
+    <string name="title_activity_settings">Configuración</string>
+    <string name="pref_rpi_url">URL de escucha de Raspberry Pi</string>
+
+    <string name="title_activity_about">Acerca de</string>
+
     <string name="msg_cannot_reach_rpi">No se puede encontrar una Raspberry Pi.</string>
     <string name="msg_speak_prompt">Diga la orden...</string>
     <string name="msg_command_not_recognized">Orden no reconocida</string>
