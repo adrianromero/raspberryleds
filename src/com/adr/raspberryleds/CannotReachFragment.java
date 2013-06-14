@@ -25,22 +25,20 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 public class CannotReachFragment extends DialogFragment {
-	
-	public final static String TAG = "T_CRF";
-	
+
+    public final static String TAG = "T_CRF";
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-    	
-    	
-    	
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-	    .setTitle(getActivity().getResources().getString(R.string.app_name))
-	    .setMessage(getActivity().getResources().getString(R.string.msg_cannot_reach_rpi))
-	    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int which) { 
-	        }
-	     });
-		
-		return builder.create();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+        .setTitle(getActivity().getResources().getString(R.string.app_name))
+        .setMessage(getActivity().getResources().getString(R.string.msg_cannot_reach_rpi))
+        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+         });
+
+        return builder.create();
     }
 }

@@ -28,36 +28,36 @@ import android.util.Log;
 
 public class LedInformation extends AsyncTask<Void, Void, JSONObject> {
 
-	private String url;
-	
-	public LedInformation(String url) {		
-		this.url = url;
-	}
+    private String url;
 
-	@Override
-	protected JSONObject doInBackground(Void... params) {
+    public LedInformation(String url) {
+        this.url = url;
+    }
 
-		JSONObject query = new JSONObject();
-		try {
-			query.put("LED0", "get");
-			query.put("LED1", "get");			
-			query.put("LED2", "get");			
-			query.put("LED3", "get");			
-			query.put("LED4", "get");			
-			query.put("LED5", "get");			
-			query.put("LED6", "get");			
-			query.put("LED7", "get");			
-			return HTTPUtils.execPOST(url, query);
-		} catch (JSONException e) {
-			return null; // never thrown.
-		} catch (IOException e) {
-			Log.d("com.adr.raspberryleds.LedInformation", null, e);
-			try {
-				query.put("exception", e.getMessage());
-			} catch (JSONException e1) {			
-				return null; // never thrown.
-			}
-			return query;
-		}	
-	}	
+    @Override
+    protected JSONObject doInBackground(Void... params) {
+
+        JSONObject query = new JSONObject();
+        try {
+            query.put("LED0", "get");
+            query.put("LED1", "get");
+            query.put("LED2", "get");
+            query.put("LED3", "get");
+            query.put("LED4", "get");
+            query.put("LED5", "get");
+            query.put("LED6", "get");
+            query.put("LED7", "get");
+            return HTTPUtils.execPOST(url, query);
+        } catch (JSONException e) {
+            return null; // never thrown.
+        } catch (IOException e) {
+            Log.d("com.adr.raspberryleds.LedInformation", null, e);
+            try {
+                query.put("exception", e.getMessage());
+            } catch (JSONException e1) {
+                return null; // never thrown.
+            }
+            return query;
+        }
+    }
 }
