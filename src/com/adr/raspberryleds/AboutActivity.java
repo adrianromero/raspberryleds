@@ -18,6 +18,7 @@
 package com.adr.raspberryleds;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -31,13 +32,16 @@ public class AboutActivity extends Activity {
 
         setContentView(R.layout.activity_about);
 
-        ((TextView) findViewById(R.id.textTitle)).setText(
-                getResources().getString(R.string.app_name) +
-                " " +
-                getResources().getString(R.string.app_version));
+        String versionName = "";
+        try {
+            versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+        }
 
         TextView tc = (TextView) findViewById(R.id.textContent);
-        tc.setText(Html.fromHtml(getResources().getString(R.string.html_about)));
+        tc.setText(Html.fromHtml(getResources().getString(R.string.html_about)
+                .replace("${app_name}", getResources().getString(R.string.app_name))
+                .replace("${app_version}", versionName)));
         tc.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

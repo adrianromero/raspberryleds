@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">Raspberry Leds</string>
-    <string name="app_version">v0.1</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_about">About</string>
@@ -29,6 +28,7 @@
     <string name="msg_command_not_recognized">Command not recognized</string>
 
     <string name="html_about"><![CDATA[
+        <h2>${app_name} ${app_version}</h2>
         <p>
         Raspberry Leds is an Android application that allows to switch on and off leds connected to
         a Raspberry Pi GPIO. In the Raspberry Pi side it is needed to install the Raspberry Leds
