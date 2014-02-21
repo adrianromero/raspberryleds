@@ -2,7 +2,7 @@
 
 Raspberry Leds is an Android application that allows to switch on and off leds connected to a Raspberry Pi GPIO. In the Raspberry Pi side it is needed to install the Raspberry Leds Server application that listen and executes the commands launched by the Android application.
 
-![Image](https://raw.github.com/adrianromero/mimamememu/master/raspberryleds.png)
+![Image](https://raw.github.com/adrianromero/raspberryleds/master/raspberryleds.png)
 
 ## Configure ##
 
